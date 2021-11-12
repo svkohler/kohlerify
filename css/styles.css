@@ -7,3 +7,63 @@
   --color-headings: #1b0760;
   --color-body: #918ca4;
 }
+
+html {
+  /* 62.5% of 16px (which is given by the browser when normal font size) leaves us with 10px which is easy to work with (1rem=10px)*/
+  font-size: 62.5%;
+}
+
+body {
+  /* set the font-family on the level of body so that all subsequent elements inherit it */
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--color-body); /* structure to access defined variables */
+  font-size: 2.4rem;
+  line-height: 1.5; /* means 1.5 times the current font size */
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-headings);
+  margin-bottom: 0.8rem;
+}
+
+h1 {
+  /* want to use a relative unit instead of px. Adjusts when user alters browser font size */
+  font-size: 7rem;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+p {
+  margin-top: 0;
+}
+
+/* meadia query for screens which are larger than 1024px */
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1.8rem;
+  }
+
+  h1 {
+    font-size: 8rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
