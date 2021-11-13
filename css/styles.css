@@ -6,7 +6,17 @@
   --color-accent: #2584ff;
   --color-headings: #1b0760;
   --color-body: #918ca4;
+  --color-border: #ccc;
+  --color-body-darker: #5c5577;
 }
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* Typography */
 
 html {
   /* 62.5% of 16px (which is given by the browser when normal font size) leaves us with 10px which is easy to work with (1rem=10px)*/
@@ -62,8 +72,582 @@ p {
   h3 {
     font-size: 2.4rem;
   }
+}
 
-  p {
-    margin-top: 0;
+/* Links */
+
+a {
+  text-decoration: none;
+}
+
+.link-arrow {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.link-arrow::after {
+  /* after each link insert arrow with the help of pseudo element after */
+  content: "-->";
+  margin-left: 5px; /* here absolute unit because the space should always be the same */
+  transition: margin 0.15s;
+}
+
+.link-arrow:hover::after {
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+  .link-arrow {
+    font-size: 1.5rem;
   }
+}
+
+/* Badges */
+
+.badge {
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
+  font-weight: 600;
+  /* prevents badge from going on a second line */
+  white-space: nowrap;
+  font-size: 2rem;
+}
+
+/* add this as a second class to specify badge further */
+.badge--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.badge--secondary {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.badge--small {
+  font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .badge {
+    font-size: 1.5rem;
+  }
+
+  .badge--small {
+    font-size: 1.2rem;
+  }
+}
+
+/* Lists */
+
+.list {
+  list-style: none; /* get rid of the default bullet points */
+  padding-left: 0;
+  color: var(--color-headings);
+}
+
+.list--inline .list__item {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.list--tick {
+  list-style-image: url(../icons/tick.svg);
+  padding-left: 3rem;
+}
+
+/* for all list__item elemnts in a list-tick element apply the following styles */
+.list--tick .list__item {
+  padding-left: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .list--tick .list__item {
+    padding-left: 0;
+  }
+}
+
+/* Icons */
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.icon--small {
+  width: 30px;
+  height: 30px;
+}
+
+.icon--primary {
+  /* fill attribute only applies to svg images */
+  filter: invert(44%) sepia(87%) saturate(6781%) hue-rotate(332deg)
+    brightness(101%) contrast(96%);
+}
+
+.icon--white {
+  /* fill attribute only applies to svg images */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(269deg)
+    brightness(104%) contrast(101%);
+}
+
+.icon-container {
+  background: #f3f9fa;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  /* span tag is per default an inline tag. width and height has not effect on inline tags. hence alter to inline-block */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-container--accent {
+  background: var(--color-accent);
+}
+
+/* Buttons */
+
+.btn {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2rem 3rem;
+  border-radius: 40px;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn--primary:hover,
+.btn--secondary:hover,
+.btn--accent:hover {
+  filter: brightness(85%);
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.btn--accent {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn--block {
+  width: 100%;
+  display: inline-block;
+}
+
+.btn--outline {
+  background: var(--color-headings);
+  color: white;
+  border: 2px solid var(--color-headings);
+}
+
+.btn--outline:hover {
+  background: white;
+  color: var(--color-headings);
+}
+
+.btn--stretched {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .btn {
+    font-size: 1.5rem;
+  }
+}
+
+/* Inupts */
+
+.input {
+  /* make sure that around text in textfield there is enough space */
+  padding: 1.5rem 3.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+  /* remove outline. some kind of border displayed by chrome */
+  outline: 0;
+  color: var(--color-headings);
+}
+
+/* pseudo element for the placeholder of the text field */
+::placeholder {
+  color: #cdcbd7;
+  font-size: 2rem;
+}
+
+/* construction to give the impression that search button is inside text input */
+.input-group {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 30px;
+}
+
+.input-group .input {
+  border: 0;
+  /* specifies how much space is occupied by the flex element. default is 0: element does not fill up the remaining space. */
+  flex-grow: 1;
+  padding: 1.5rem 1rem;
+}
+
+.input-group .btn {
+  margin: 4px;
+}
+
+@media screen and (min-width: 1024px) {
+  .input {
+    font-size: 1.5rem;
+  }
+
+  ::placeholder {
+    color: #cdcbd7;
+    font-size: 1.5rem;
+  }
+}
+
+/* Card */
+
+.card {
+  border-radius: 7px;
+  box-shadow: 0 0 20px 10px #f3fef3;
+  overflow: hidden;
+}
+
+.card__header,
+.card__body {
+  padding: 2rem 3rem;
+}
+
+.card--primary .card__header {
+  background: var(--color-primary);
+  color: white;
+}
+
+.card--secondary .card__header {
+  background: var(--color-secondary);
+  color: white;
+}
+
+/* Plans */
+
+.plan__name {
+  color: white;
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.4rem;
+}
+
+.plan__price {
+  font-size: 6rem;
+}
+
+.plan__billing-cycle {
+  font-size: 2.4rem;
+  font-weight: 300;
+  opacity: 0.8;
+  margin-right: 1rem;
+}
+
+.plan__description {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  /* prevent description from going on the same line as billing-cycle and price */
+  display: block;
+}
+
+.plan .list__item {
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+.plan--popular .card__header {
+  /* now we can position the popular badge absolutely */
+  position: relative;
+}
+
+/* when a card has a class popular then we want to insert something before the header */
+.plan--popular .card__header::before {
+  content: url(../images/popular.svg);
+  width: 40px;
+  /* since it is per default an inline element, we have to modify it in order to make the width work */
+  display: inline-block;
+  position: absolute;
+  top: -6px;
+  right: 5%;
+}
+
+@media screen and (min-width: 1024px) {
+  .plan__name {
+    font-size: 1.4rem;
+  }
+
+  .plan__price {
+    font-size: 5rem;
+  }
+
+  .plan__billing-cycle {
+    font-size: 1.6rem;
+  }
+
+  .plan__description {
+    font-size: 1.7rem;
+  }
+}
+
+/* Media */
+
+.media {
+  display: flex;
+}
+
+.media__title {
+  margin-top: 0;
+}
+
+.media__body {
+  margin: 0 2rem;
+}
+
+.media__image {
+  margin-top: 1rem;
+}
+
+/* Qoutes */
+
+.quote {
+  font-size: 3rem;
+  font-style: italic;
+  color: var(--color-body-darker);
+  line-height: 1.3;
+}
+
+.quote__text::before {
+  content: open-quote;
+}
+
+.quote__text::after {
+  content: close-quote;
+}
+
+.quote__author {
+  font-size: 3rem;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 0.3rem;
+}
+
+.quote__company {
+  color: var(--color-headings);
+  margin-top: 0.3rem;
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: normal;
+  opacity: 40%;
+}
+
+.quote__line {
+  position: relative;
+  bottom: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+  .quote {
+    font-size: 2rem;
+  }
+
+  .quote__author {
+    font-size: 2.4rem;
+  }
+
+  .quote__company {
+    font-size: 1.6rem;
+  }
+}
+
+/* Grids */
+
+.grid {
+  display: grid;
+}
+
+@media screen and (min-width: 768px) {
+  .grid--cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .grid--cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Testimonials */
+
+.testimonial {
+  padding: 3rem;
+}
+
+.testimonial__image {
+  /*  in order to position the icon absolutely */
+  position: relative;
+}
+
+.testimonial__image > img {
+  width: 100%;
+}
+
+/* direct child selector: in our testimonial__image we target the icon-container */
+.testimonial__image > .icon-container {
+  position: absolute;
+  top: 3rem;
+  right: -32px;
+}
+
+@media screen and (min-width: 768px) {
+  .testimonial .quote,
+  .testimonial .quote__author {
+    font-size: 2.4rem;
+  }
+
+  .testimonial .quote {
+    margin-left: 6rem;
+  }
+}
+
+/* Callout */
+
+.callout {
+  padding: 4rem;
+  border-radius: 5px;
+  margin: 2rem;
+}
+
+.callout--primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.callout__heading {
+  margin-top: 0;
+  font-size: 3rem;
+}
+
+.callout .btn {
+  /* instead of applying it to the grid (justify-itmes etc). With justify-self we can apply it to a element in the grid */
+  justify-self: center;
+  align-self: center;
+}
+
+.callout_content {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .callout_content {
+    text-align: left;
+  }
+
+  .callout .btn {
+    /* instead of applying it to the grid (justify-itmes etc). With justify-self we can apply it to a element in the grid */
+    justify-self: start;
+    margin: 2rem 2rem;
+  }
+
+  .callout .grid--cols-2 {
+    /* this setup gives the button as much space as needed and the rest is occupied by 1fr */
+    grid-template-columns: 1fr auto;
+  }
+}
+
+/* Collapsibles */
+
+.collapsible__header {
+  display: flex;
+  /* this setting will push elements to the edges of the box and spaces them evenly */
+  justify-content: space-between;
+}
+
+.collapsible__heading {
+  margin-top: 0;
+  font-size: 3rem;
+}
+
+.collapsible-chevron {
+  transform: rotate(90deg);
+  transition: transform 0.3s;
+}
+
+.collapsible__content {
+  /* choose these attributes to make a good transition */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.collapsible--expanded .collapsible-chevron {
+  transform: rotate(0);
+}
+
+.collapsible--expanded .collapsible__content {
+  max-height: 100vh;
+  opacity: 1;
+}
+
+/* Blocks */
+
+.block {
+  padding: 6rem 2rem;
+  border: 2px solid red;
+}
+
+.block__heading {
+  margin-top: 0;
+}
+
+.block--dark {
+  background: black;
+  color: #7b858b;
+}
+
+.block--dark .block__heading {
+  color: white;
+}
+
+.block--skewed-right {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 28% 74%, 0 100%);
+}
+
+.block--skewed-left {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 77%, 0 100%);
+}
+
+.block__header {
+  text-align: center;
+}
+
+/* Reusable Class */
+
+/* can be used wherever you want to apply this constraint */
+.container {
+  max-width: 1140px;
+  /* zero vertical margin and horizontally the space which is left is equally divided to left and right */
+  margin: 0 auto;
 }
