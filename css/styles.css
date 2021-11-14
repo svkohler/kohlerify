@@ -36,6 +36,7 @@ h2,
 h3 {
   color: var(--color-headings);
   margin-bottom: 0.8rem;
+  line-height: 1.1;
 }
 
 h1 {
@@ -49,6 +50,7 @@ h2 {
 
 h3 {
   font-size: 3rem;
+  font-weight: 500;
 }
 
 p {
@@ -126,6 +128,16 @@ a {
   color: white;
 }
 
+.badge--accent {
+  background: var(--color-accent);
+  color: white;
+}
+
+.badge--grey {
+  background: grey;
+  color: white;
+}
+
 .badge--small {
   font-size: 1.6rem;
   padding: 0.5rem 1.5rem;
@@ -146,7 +158,6 @@ a {
 .list {
   list-style: none; /* get rid of the default bullet points */
   padding-left: 0;
-  color: var(--color-headings);
 }
 
 .list--inline .list__item {
@@ -157,6 +168,7 @@ a {
 .list--tick {
   list-style-image: url(../icons/tick.svg);
   padding-left: 3rem;
+  color: var(--color-headings);
 }
 
 /* for all list__item elemnts in a list-tick element apply the following styles */
@@ -181,6 +193,11 @@ a {
 .icon--small {
   width: 30px;
   height: 30px;
+}
+
+.icon--very-small {
+  width: 20px;
+  height: 20px;
 }
 
 .icon--primary {
@@ -223,6 +240,13 @@ a {
   white-space: nowrap;
   text-align: center;
   margin: 1rem 0;
+}
+
+.btn .icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  vertical-align: middle;
 }
 
 .btn--primary {
@@ -302,7 +326,9 @@ a {
   border: 0;
   /* specifies how much space is occupied by the flex element. default is 0: element does not fill up the remaining space. */
   flex-grow: 1;
-  padding: 1.5rem 1rem;
+  flex-shrink: 1;
+  padding: 1.5rem 2rem;
+  min-width: 0;
 }
 
 .input-group .btn {
@@ -326,6 +352,7 @@ a {
   border-radius: 7px;
   box-shadow: 0 0 20px 10px #f3fef3;
   overflow: hidden;
+  transition: all 0.2s;
 }
 
 .card__header,
@@ -340,6 +367,11 @@ a {
 
 .card--secondary .card__header {
   background: var(--color-secondary);
+  color: white;
+}
+
+.card--accent .card__header {
+  background: var(--color-accent);
   color: white;
 }
 
@@ -374,6 +406,10 @@ a {
 .plan .list__item {
   margin-bottom: 2rem;
   letter-spacing: 1px;
+}
+
+.plan--popular {
+  transform: scale(1.1);
 }
 
 .plan--popular .card__header {
@@ -414,6 +450,7 @@ a {
 
 .media {
   display: flex;
+  margin-bottom: 2rem;
 }
 
 .media__title {
@@ -615,7 +652,7 @@ a {
 
 .block {
   padding: 6rem 2rem;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .block__heading {
@@ -627,12 +664,14 @@ a {
   color: #7b858b;
 }
 
-.block--dark .block__heading {
+.block--dark h1,
+.block--dark h2,
+.block--dark h3 {
   color: white;
 }
 
 .block--skewed-right {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 28% 74%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 28% 90%, 0 100%);
 }
 
 .block--skewed-left {
@@ -641,6 +680,270 @@ a {
 
 .block__header {
   text-align: center;
+}
+
+/* Navigation Bar */
+
+.nav {
+  background: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.nav__list {
+  /* make sure it goes on another line */
+  width: 100%;
+  margin: 0;
+}
+
+.nav__item {
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid #222;
+}
+
+.nav__item > a {
+  color: #d2d0db;
+  transition: color 0.3s;
+}
+
+.nav__item > a:hover {
+  color: white;
+}
+
+.nav__toggler {
+  opacity: 0.5;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav.collapsible--expanded .nav__toggler {
+  opacity: 1;
+  box-shadow: 0 0 0 3px #666;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__toggler {
+    display: none;
+  }
+
+  .nav__list {
+    width: auto;
+    display: flex;
+    font-size: 1.6rem;
+    /* make sure the navigation list is visible from the start */
+    /* overwrites the .collapsible__content from earlier. If however the collapsible__content rule would be later in the css file then invisible */
+    /* later rules seem to have precedent */
+    max-height: 100%;
+    opacity: 1;
+  }
+
+  .nav__item {
+    border-bottom: none;
+  }
+}
+
+/* Hero */
+
+.hero {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 90%, 0 100%);
+}
+
+.hero__tagline {
+  font-size: 2rem;
+  color: #b9c3cf;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.hero__image {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    padding: 0;
+  }
+
+  .hero__content {
+    text-align: left;
+    align-self: center;
+  }
+}
+
+/* Domain Block */
+.block-domain {
+  padding: 0;
+}
+
+.block-domain .input-group {
+  box-shadow: 0 0 30px 20px #e6ebee;
+  border: 0;
+  margin: 4rem auto;
+  max-width: 670px;
+}
+
+.block-domain__prices {
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 6rem 6rem;
+  font-size: 2rem;
+  font-weight: 600;
+  max-width: 700px;
+  /* all the remaining space get distributed equally on the left and right */
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .block-domain__prices {
+    justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 6rem 6rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
+
+/* Plans Block */
+.block-plans .grid {
+  gap: 8rem 4rem;
+}
+
+.block-plans .card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .block-plans .card:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Features */
+
+.block-f {
+  padding-bottom: 0;
+}
+
+.feature {
+  gap: 4rem;
+  justify-items: center;
+  align-content: center;
+}
+
+.feature__image {
+  width: 100%;
+}
+
+.feature__heading {
+  margin: 1rem 0;
+}
+
+.feature__header {
+  margin-bottom: 8rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container-features:nth-of-type(even) .feature__content {
+    order: 2;
+  }
+}
+
+/* Showcase */
+
+.block-showcase__image {
+  width: 100%;
+}
+
+.showcase__content .media__image {
+  margin-top: 0;
+}
+
+.showcase__content {
+  text-align: left;
+}
+
+@media screen and (min-width: 768px) {
+  /* if we have a block-showcase element and within a grid element we want the following: */
+  .block-showcase .grid {
+    grid-template-columns: 50% 50%;
+  }
+
+  .block-showcase__image {
+    width: auto;
+    max-width: 700px;
+    justify-self: right;
+  }
+}
+
+/* Footer */
+.footer {
+  background: #232323;
+}
+
+.footer__section {
+  padding: 2rem;
+  border-bottom: 1px solid #393939;
+}
+
+.footer__heading {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.footer__brand {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.footer__copyright {
+  font-size: 2.1rem;
+  color: white;
+  opacity: 0.3;
+}
+
+@media screen and (min-width: 768px) {
+  .footer__sections {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+
+  .footer .collapsible-chevron {
+    display: none;
+  }
+
+  .footer .collapsible__content {
+    opacity: 1;
+    max-height: 100%;
+  }
+
+  .footer__brand {
+    order: -1;
+    justify-self: right;
+    margin-top: 1rem;
+  }
+
+  .footer__copyright {
+    font-size: 1.5rem;
+  }
+
+  .footer__section {
+    border: none;
+  }
+
+  .footer__heading {
+    font-size: 1.6rem;
+  }
+
+  .footer__brand img {
+    width: 100%;
+  }
 }
 
 /* Reusable Class */
